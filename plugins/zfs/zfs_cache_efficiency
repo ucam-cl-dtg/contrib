@@ -15,11 +15,11 @@ case $1 in
 graph_title ZFS ARC efficiency
 graph_vlabel %
 graph_scale no
-graph_category filesystem 
+graph_category ZFS
 graph_args -l 0 
-graph_info FreeBSD ZFS ARC Utilisation - Counters
+graph_info ZFS ARC Utilisation - Counters
 graph_period minute
-graph_order hits misses l2_hits l2_misses mfu_hits mru_hits arc_access_total mfu_hits_perc mru_hits_perc arc_misses_perc l2_efficency_tot
+graph_order hits misses l2_hits l2_misses mfu_hits mru_hits arc_access_total mfu_hits_perc
 deleted.graph no
 deleted.min 0
 deleted.type DERIVE
@@ -70,6 +70,7 @@ hits.type DERIVE
 hits.label Cache hits
 l2_abort_lowmem.graph no
 l2_abort_lowmem.min 0
+l2_abort_lowmem.label L2 abort lowmem
 l2_abort_lowmem.type GAUGE
 l2_cksum_bad.graph no
 l2_cksum_bad.min 0
@@ -77,15 +78,19 @@ l2_cksum_bad.type DERIVE
 l2_cksum_bad.label ARCL2 Bad checksum errors
 l2_evict_lock_retry.graph no
 l2_evict_lock_retry.min 0
+l2_evict_lock_retry.label L2 evict lock retry
 l2_evict_lock_retry.type DERIVE
 l2_evict_reading.graph no
 l2_evict_reading.min 0
 l2_evict_reading.type DERIVE
+l2_evict_reading.label L2 evict reading
 l2_feeds.graph no
 l2_feeds.min 0
+l2_feeds.label L2 feeds
 l2_feeds.type DERIVE
 l2_free_on_write.graph no
 l2_free_on_write.min 0
+l2_free_on_write.label L2 free on write
 l2_free_on_write.type DERIVE
 l2_hits.graph no
 l2_hits.min 0
@@ -101,12 +106,15 @@ l2_misses.type DERIVE
 l2_misses.label L2ARC cache misses
 l2_rw_clash.graph no
 l2_rw_clash.min 0
+l2_rw_clash.label L2 read write clash
 l2_rw_clash.type DERIVE
 l2_writes_done.graph no
 l2_writes_done.min 0
 l2_writes_done.type DERIVE
 l2_writes_error.graph no
 l2_writes_error.min 0
+l2_writes_error.label L2 writes error
+l2_writes_done.label L2 writes done
 l2_writes_error.type DERIVE
 l2_writes_hdr_miss.graph no
 l2_writes_hdr_miss.min 0
@@ -141,6 +149,7 @@ mru_hits.type DERIVE
 mru_hits.label Most recently used hits
 mutex_miss.graph no
 mutex_miss.min 0
+mutex_miss.label mutex miss
 mutex_miss.type DERIVE
 prefetch_data_hits.graph no
 prefetch_data_hits.min 0
@@ -162,27 +171,6 @@ recycle_miss.graph no
 recycle_miss.min 0
 recycle_miss.type DERIVE
 recycle_miss.label Recycle misses
-arc_access_total.graph no
-arc_access_total.cdef hits,misses,ADDNAN
-arc_access_total.label ARC access total number
-arc_hits_perc.cdef hits,100,*,arc_access_total,/
-arc_hits_perc.label ARC hits
-arc_hits_perc.graph no
-real_hits.cdef mfu_hits,mru_hits,ADDNAN,100,*,hits,/
-real_hits.label ARC real (MRU + MFU) hits (no ghost & anon)
-real_hits.graph no
-mfu_hits_perc.cdef mfu_hits,100,*,arc_access_total,/
-mfu_hits_perc.label Most frequently used hits
-mfu_hits_perc.graph yes
-mfu_hits_perc.draw AREA
-mru_hits_perc.cdef mru_hits,100,*,arc_access_total,/
-mru_hits_perc.label Most recently used hits
-mru_hits_perc.graph yes
-mru_hits_perc.draw STACK
-arc_misses_perc.graph yes
-arc_misses_perc.cdef misses,100,*,arc_access_total,/
-arc_misses_perc.label ARC misses
-arc_misses_perc.draw STACK
 l2_efficency_tot.graph yes
 l2_efficency_tot.cdef l2_hits,100,*,l2_hits,l2_misses,hits,misses,ADDNAN,ADDNAN,ADDNAN,/
 l2_efficency_tot.label L2ARC hit ratio of L1&L2 accesses
