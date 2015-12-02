@@ -2,7 +2,7 @@
 language: perl
 install:
   - sudo apt-get update
-  - sudo apt-get --no-install-recommends install devscripts python ruby php5-cli gawk ksh pylint
+  - sudo apt-get --no-install-recommends install devscripts python python3 ruby php5-cli gawk ksh pylint
   - sudo apt-get --no-install-recommends install pkg-config libdb-dev libvirt-dev libexpat-dev
   # - Munin/Plugin.pm is in "munin-node" on precise
   - sudo apt-get --no-install-recommends install munin-node
@@ -28,6 +28,7 @@ install:
   - cpanm --notest Graphics::ColorObject
   - cpanm --notest IPC::Run3
   - cpanm --notest IPC::ShareLite
+  - cpanm --notest JSON
   - cpanm --notest JSON::Any
   - cpanm --notest Mail::Sendmail
   - cpanm --notest Modern::Perl
@@ -44,6 +45,7 @@ install:
   - cpanm --notest Redis
   - cpanm --notest WWW::Mechanize::TreeBuilder
   - cpanm --notest Text::Iconv
+  - cpanm --notest YAML
   - cpanm --notest XML::LibXML
   - cpanm --notest XML::Simple
   - cpanm --notest XML::Smart
