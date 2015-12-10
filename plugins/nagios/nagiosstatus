@@ -40,7 +40,7 @@ use strict;
 use warnings;
 
 # File location may be defined with environment variable
-my $NAGIOSSTAT=($ENV{'statuslog'} || '/var/log/nagios/status.log');
+my $NAGIOSSTAT=($ENV{'statuslog'} || '/var/log/nagios3/nagios.log');
 
 if ($ARGV[0]) {
   if ($ARGV[0] eq 'autoconf') {
